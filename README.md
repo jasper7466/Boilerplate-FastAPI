@@ -82,6 +82,12 @@
   ### Реализация ручек аккаунта
   - Установка пакета `passlib`
     > poetry add passlib
+  - Установка пакета `python-multipart`
+    > poetry add python-multipart
+  - config.py:
+    - `PROJECT_ROOT = Path(__file__).parents[2]`
+  - Создана модель AccountModel в models.py
+  - Добавлены ручки в app.py
 </details>
 
 > &#10060; &uArr; &uArr; &uArr; BOILERPLATE DESCRIPTION. REMOVE BEFORE FLIGHT &uArr; &uArr; &uArr; &#10060;
