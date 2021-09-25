@@ -61,6 +61,8 @@
     > poetry add sqlalchemy
   - Установка пакета `alembic`
     > poetry add alembic
+  - Инициализация alembic
+    > alembic init
   - Установка пакета `aiofiles`
     > poetry add aiofiles
 
