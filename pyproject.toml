@@ -11,6 +11,7 @@ uvicorn = "^0.15.0"
 SQLAlchemy = "^1.4.25"
 dynaconf = "^3.1.7"
 aiofiles = "^0.7.0"
+alembic = "^1.7.3"
 
 [tool.poetry.dev-dependencies]
 
