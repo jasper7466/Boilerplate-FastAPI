@@ -8,6 +8,9 @@ authors = ["Your Name <you@example.com>"]
 python = "^3.9"
 fastapi = "^0.68.1"
 uvicorn = "^0.15.0"
+SQLAlchemy = "^1.4.25"
+dynaconf = "^3.1.7"
+aiofiles = "^0.7.0"
 
 [tool.poetry.dev-dependencies]
 
