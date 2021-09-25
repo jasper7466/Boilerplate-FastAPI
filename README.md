@@ -1,4 +1,4 @@
-> &#10060; &dArr; &dArr; &dArr; BOILERPLATE DESCRIPTION. REMOVE BEFORE FLIGHT &dArr; &dArr; &dArr; &#10060;
+> &#10060; &dArr; &dArr; &dArr; BOILERPLATE DESCRIPTION. REMOVE AFTER INITIALIZATION &dArr; &dArr; &dArr; &#10060;
 
 # Boilerplate-FastAPI
 
@@ -10,6 +10,10 @@
 
 - Менеджмент пакетов: Poetry
 - HTTP API фреймворк: FastAPI
+- Управление конфигурацией: Dynaconf
+- БД: SQLite
+- ORM: SQLAlchemy
+- Миграции: Alembic
 
 ## Лог ручной инициализации
 
@@ -90,7 +94,7 @@
   - Добавлены ручки в app.py
 </details>
 
-> &#10060; &uArr; &uArr; &uArr; BOILERPLATE DESCRIPTION. REMOVE BEFORE FLIGHT &uArr; &uArr; &uArr; &#10060;
+> &#10060; &uArr; &uArr; &uArr; BOILERPLATE DESCRIPTION. REMOVE AFTER INITIALIZATION &uArr; &uArr; &uArr; &#10060;
 
 # YourProject:Name
 
