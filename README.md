@@ -59,12 +59,25 @@
 
   - Установка пакета `sqlalchemy`
     > poetry add sqlalchemy
+  - Установка пакета `aiofiles`
+    > poetry add aiofiles
   - Установка пакета `alembic`
     > poetry add alembic
   - Инициализация alembic
     > alembic init
-  - Установка пакета `aiofiles`
-    > poetry add aiofiles
+  - Конфигурация settings.toml
+    - `database_url = "sqlite:///database.sqlite"`
+  - Конфигурация в alembic.ini
+    - `prepend_sys_path = src`
+    - `file_template = %%(year)d-%%(month).2d-%%(day).2d_%%(hour).2d:%%(minute).2d:%%(second).2d_%%(rev)s`
+    - `# sqlalchemy.url = driver://user:pass@localhost/dbname` - закомментировать
+  - Конфигурация в alembic/env.py
+    - `target_metadata = Base.metadata`
+    - `config.set_main_option('sqlalchemy.url', settings.database_url)`
+  - Создание миграции
+    - `alembic revision --autogenerate -m "Create 'accounts' table"`
+  - Применение миграции
+    - `alembic upgrade head`
 
 </details>
 
