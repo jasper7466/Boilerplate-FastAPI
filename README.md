@@ -79,6 +79,9 @@
   - Применение миграции
     - `alembic upgrade head`
 
+  ### Реализация ручек аккаунта
+  - Установка пакета `passlib`
+    > poetry add passlib
 </details>
 
 > &#10060; &uArr; &uArr; &uArr; BOILERPLATE DESCRIPTION. REMOVE BEFORE FLIGHT &uArr; &uArr; &uArr; &#10060;
