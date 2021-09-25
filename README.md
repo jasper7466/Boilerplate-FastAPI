@@ -19,7 +19,14 @@
   > poetry env use python3.9
 - Poetry. Активация venv
   > poetry shell
-  
+
+### Фреймворк FastAPI
+
+- Установка пакета `FastAPI`
+  > poetry add fastapi
+- Установка пакета `Uvicorn` (ASGI-сервер)
+  > poetry add uvicorn
+
 </details>
 
 > &#10060; &uArr; &uArr; &uArr; BOILERPLATE DESCRIPTION. REMOVE BEFORE FLIGHT &uArr; &uArr; &uArr; &#10060;
