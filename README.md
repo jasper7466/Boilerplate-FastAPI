@@ -19,6 +19,7 @@
   > poetry env use python3.9
 - Poetry. Активация venv
   > poetry shell
+- В среде разработки для проекта необходимо выбрать интерпретатор из локального venv
 
 ### Фреймворк FastAPI
 
@@ -26,6 +27,14 @@
   > poetry add fastapi
 - Установка пакета `Uvicorn` (ASGI-сервер)
   > poetry add uvicorn
+- Создана директория src
+- Создан пакет `src/application`
+- Настроено минимальное приложение в src/application/app.py
+- В настройках Run/Debug конфигурации среды разработки необходимо создать новую с параметрами:
+  - Target to run - Module name: (указать название пакета приложения, в данном случае - application)
+  - Python interpreter: (выбрать из локального venv)
+  - Working directory: (указать корень проекта)
+
 
 </details>
 
