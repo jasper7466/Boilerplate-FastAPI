@@ -92,6 +92,10 @@
     - `PROJECT_ROOT = Path(__file__).parents[2]`
   - Создана модель AccountModel в models.py
   - Добавлены ручки в app.py
+
+  ### Тестирование
+  - Установка пакета `pytest` (dev-dependency)
+    > poetry add --dev pytest
 </details>
 
 > &#10060; &uArr; &uArr; &uArr; BOILERPLATE DESCRIPTION. REMOVE AFTER INITIALIZATION &uArr; &uArr; &uArr; &#10060;
