@@ -3,7 +3,7 @@ from fastapi.testclient import TestClient
 from application.app import app
 from application.database import get_session
 from application.database import Base
-from application.database import Account
+from application.accounts.models import AccountModel
 from tests.database import Session
 from tests.database import engine
 from tests.database import get_session as get_test_session
@@ -19,7 +19,7 @@ def test_get_account():
     url = 'get-account/1'
 
     with Session() as session:
-        session.add(Account(
+        session.add(AccountModel(
             email='test',
             username='test',
             password='test',

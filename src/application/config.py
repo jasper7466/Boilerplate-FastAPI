@@ -10,3 +10,7 @@ settings = Dynaconf(
     envvar_prefix="APPLICATION",
     settings_files=['settings.toml', '.secrets.toml'],
 )
+
+
+def get_settings() -> Dynaconf:
+    return settings

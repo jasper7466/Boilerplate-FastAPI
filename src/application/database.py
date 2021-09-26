@@ -1,6 +1,3 @@
-from sqlalchemy import Column
-from sqlalchemy import Integer
-from sqlalchemy import String
 from sqlalchemy import create_engine
 from sqlalchemy import event
 from sqlalchemy.engine import Engine
@@ -24,7 +21,6 @@ engine = create_engine(
     connect_args={'check_same_thread': False}
 )
 
-
 Session = sessionmaker(engine, future=True)
 Base = declarative_base()
 
@@ -34,13 +30,4 @@ def get_session() -> Session:
         yield session
 
 
-class Account(Base):
-    __tablename__ = 'accounts'
-
-    id = Column(Integer, primary_key=True)
-    email = Column(String, nullable=False)
-    username = Column(String, nullable=False, unique=True)
-    password = Column(String, nullable=False)
-    first_name = Column(String)
-    last_name = Column(String)
-    avatar = Column(String)
+from .accounts.models import AccountModel  # noqa
