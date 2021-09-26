@@ -96,6 +96,8 @@
   ### Тестирование
   - Установка пакета `pytest` (dev-dependency)
     > poetry add --dev pytest
+  - В корне проекта создана директория tests с файлом conftest.py
+  - В настройках Run/Debug конфигурации среды разработки для удобства можно создать конфигурацию, выбрав тип "pytest"
 </details>
 
 > &#10060; &uArr; &uArr; &uArr; BOILERPLATE DESCRIPTION. REMOVE AFTER INITIALIZATION &uArr; &uArr; &uArr; &#10060;
