@@ -9,6 +9,7 @@ from fastapi import Response
 from fastapi import Form
 from fastapi import HTTPException
 from fastapi import status
+from fastapi import Depends
 from fastapi.staticfiles import StaticFiles
 from passlib.hash import pbkdf2_sha256
 from sqlalchemy import select
@@ -19,6 +20,7 @@ from .config import settings
 from .config import PROJECT_ROOT
 from .database import Account
 from .database import Session
+from .database import get_session
 from .models import AccountModel
 
 # Авто-создание директории со статикой, если её не существует
@@ -65,15 +67,17 @@ def get_accounts():
 
 
 @app.get('/get-account/{account_id}', response_model=AccountModel)
-def get_account(account_id: int):
-    with Session() as session:
-        try:
-            account = session.execute(
-                select(Account)
-                .where(Account.id == account_id)
-            ).scalar_one()
-        except NoResultFound:
-            raise HTTPException(status.HTTP_404_NOT_FOUND) from None
+def get_account(
+    account_id: int,
+    session: Session = Depends(get_session)
+):
+    try:
+        account = session.execute(
+            select(Account)
+            .where(Account.id == account_id)
+        ).scalar_one()
+    except NoResultFound:
+        raise HTTPException(status.HTTP_404_NOT_FOUND) from None
     return account
 
 

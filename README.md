@@ -100,7 +100,7 @@
   - В настройках Run/Debug конфигурации среды разработки для удобства можно создать конфигурацию, выбрав тип "pytest"
   - Установка пакета `requests` (dev-dependency)
     > poetry add --dev requests
-
+  - Добавлен тест на ручку "get-account/id"
 </details>
 
 > &#10060; &uArr; &uArr; &uArr; BOILERPLATE DESCRIPTION. REMOVE AFTER INITIALIZATION &uArr; &uArr; &uArr; &#10060;
