@@ -98,6 +98,9 @@
     > poetry add --dev pytest
   - В корне проекта создана директория tests с файлом conftest.py
   - В настройках Run/Debug конфигурации среды разработки для удобства можно создать конфигурацию, выбрав тип "pytest"
+  - Установка пакета `requests` (dev-dependency)
+    > poetry add --dev requests
+
 </details>
 
 > &#10060; &uArr; &uArr; &uArr; BOILERPLATE DESCRIPTION. REMOVE AFTER INITIALIZATION &uArr; &uArr; &uArr; &#10060;
