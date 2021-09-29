@@ -3,6 +3,7 @@ from typing import List
 
 from fastapi import HTTPException
 from fastapi import Depends
+from fastapi import UploadFile
 from fastapi import status
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.exc import NoResultFound
@@ -36,6 +37,7 @@ class AccountService:
         self.session.add(account)
         try:
             self.session.commit()
+            return account
         except IntegrityError:
             raise HTTPException(status.HTTP_409_CONFLICT) from None
 
@@ -51,20 +53,26 @@ class AccountService:
     def update_account(self, account_id: int, account_update: AccountUpdateSchema):
         account = self._get_account(account_id)
 
-        if not account_update.first_name and not account_update.last_name and not account_update.avatar:
+        if not account_update.first_name and not account_update.last_name:
             return
 
         account.first_name = account_update.first_name or account.first_name
         account.last_name = account_update.last_name or account.last_name
 
-        if account_update.avatar:
-            filepath = PROJECT_ROOT / self.settings.static_directory / account_update.avatar.filename
-            with filepath.open(mode='wb') as f:
-                shutil.copyfileobj(account_update.avatar.file, f)
-            file_url = f'{self.settings.static_url}/{account_update.avatar.filename}'
-            account.avatar = file_url
+        self.session.commit()
+        return account
+
+    def update_account_avatar(self, account_id: int, avatar: UploadFile):
+        account = self._get_account(account_id)
+
+        filepath = PROJECT_ROOT / self.settings.static_directory / avatar.filename
+        with filepath.open(mode='wb') as f:
+            shutil.copyfileobj(avatar.file, f)
+        file_url = f'{self.settings.static_url}/{avatar.filename}'
+        account.avatar = file_url
 
         self.session.commit()
+        return account
 
     def _get_account(self, account_id: int) -> AccountModel:
         try:

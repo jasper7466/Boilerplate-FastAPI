@@ -25,4 +25,3 @@ class AccountCreateSchema(BaseModel):
 class AccountUpdateSchema(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
-    avatar: Optional[UploadFile] = None
