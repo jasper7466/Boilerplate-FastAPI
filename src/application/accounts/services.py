@@ -1,29 +1,30 @@
 import shutil
 from typing import List
 
-from fastapi import HTTPException
 from fastapi import Depends
 from fastapi import UploadFile
-from fastapi import status
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy import select
 from passlib.hash import pbkdf2_sha256
 
+from ..config import PROJECT_ROOT
+from ..config import Settings
 from ..config import get_settings
+from ..database import Session
 from ..database import get_session
+from ..exeptions import EntityConflictError
+from ..exeptions import EntityDoesNotExistError
 from .models import AccountModel
 from .schemas import AccountCreateSchema
 from .schemas import AccountUpdateSchema
-
-from ..config import PROJECT_ROOT
 
 
 class AccountService:
     def __init__(
         self,
-        session=Depends(get_session),
-        settings=Depends(get_settings)
+        session: Session = Depends(get_session),
+        settings: Settings = Depends(get_settings)
     ):
         self.session = session
         self.settings = settings
@@ -39,7 +40,7 @@ class AccountService:
             self.session.commit()
             return account
         except IntegrityError:
-            raise HTTPException(status.HTTP_409_CONFLICT) from None
+            raise EntityConflictError from None
 
     def get_accounts(self) -> List[AccountModel]:
         accounts = self.session.execute(
@@ -81,5 +82,5 @@ class AccountService:
                 .where(AccountModel.id == account_id)
             ).scalar_one()
         except NoResultFound:
-            raise HTTPException(status.HTTP_404_NOT_FOUND) from None
+            raise EntityDoesNotExistError from None
         return account

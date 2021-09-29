@@ -5,13 +5,15 @@ from fastapi import APIRouter
 from fastapi import File
 from fastapi import UploadFile
 from fastapi import Depends
+from fastapi import HTTPException
 from fastapi import status
 
+from ..exeptions import EntityConflictError
+from ..exeptions import EntityDoesNotExistError
 from .schemas import AccountSchema
 from .schemas import AccountCreateSchema
 from .schemas import AccountUpdateSchema
 from .services import AccountService
-
 
 router = APIRouter(
     prefix='/accounts'
@@ -31,8 +33,11 @@ def create_account(
     account_create: AccountCreateSchema,
     service: AccountService = Depends(),
 ):
-    account = service.create_account(account_create)
-    return account
+    try:
+        account = service.create_account(account_create)
+        return account
+    except EntityConflictError:
+        raise HTTPException(status.HTTP_409_CONFLICT) from None
 
 
 @router.get('', response_model=List[AccountSchema])
@@ -47,7 +52,10 @@ def get_account(
     account_id: int,
     service: AccountService = Depends(),
 ):
-    return service.get_account(account_id)
+    try:
+        return service.get_account(account_id)
+    except EntityDoesNotExistError:
+        raise HTTPException(status.HTTP_404_NOT_FOUND) from None
 
 
 @router.patch('/{account_id}', response_model=AccountSchema)
@@ -56,8 +64,11 @@ def edit_account(
     account_update: AccountUpdateSchema,
     service: AccountService = Depends(),
 ):
-    account = service.update_account(account_id, account_update)
-    return account
+    try:
+        account = service.update_account(account_id, account_update)
+        return account
+    except EntityDoesNotExistError:
+        raise HTTPException(status.HTTP_404_NOT_FOUND) from None
 
 
 @router.put('/{account_id}/avatar', response_model=AccountSchema)
@@ -66,5 +77,8 @@ def update_account_avatar(
     avatar: UploadFile = File(...),
     service: AccountService = Depends(),
 ):
-    account = service.update_account_avatar(account_id, avatar)
-    return account
+    try:
+        account = service.update_account_avatar(account_id, avatar)
+        return account
+    except EntityDoesNotExistError:
+        raise HTTPException(status.HTTP_404_NOT_FOUND) from None

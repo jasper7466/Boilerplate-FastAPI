@@ -6,6 +6,9 @@ from dynaconf import Dynaconf
 
 PROJECT_ROOT = Path(__file__).parents[2]
 
+# Псевдоним типа
+Settings = Dynaconf
+
 settings = Dynaconf(
     envvar_prefix="APPLICATION",
     settings_files=['settings.toml', '.secrets.toml'],
