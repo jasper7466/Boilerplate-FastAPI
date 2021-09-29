@@ -8,6 +8,8 @@ from sqlalchemy.exc import NoResultFound
 from sqlalchemy import select
 from passlib.hash import pbkdf2_sha256
 
+from utils.append_updates import append_updates
+
 from ..config import PROJECT_ROOT
 from ..config import Settings
 from ..config import get_settings
@@ -53,12 +55,7 @@ class AccountService:
 
     def update_account(self, account_id: int, account_update: AccountUpdateSchema):
         account = self._get_account(account_id)
-
-        if not account_update.first_name and not account_update.last_name:
-            return
-
-        account.first_name = account_update.first_name or account.first_name
-        account.last_name = account_update.last_name or account.last_name
+        account = append_updates(account, account_update)
 
         self.session.commit()
         return account
