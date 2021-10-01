@@ -30,4 +30,4 @@ def get_session() -> Session:
         yield session
 
 
-from .accounts.models import AccountModel  # noqa
+from .accounts.models import AccountTable  # noqa

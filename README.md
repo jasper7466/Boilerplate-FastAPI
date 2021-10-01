@@ -14,6 +14,7 @@
 - БД: SQLite
 - ORM: SQLAlchemy
 - Миграции: Alembic
+- Авторизация: OAuth2
 
 ## Лог ручной инициализации
 
@@ -101,6 +102,10 @@
   - Установка пакета `requests` (dev-dependency)
     > poetry add --dev requests
   - Добавлен тест на ручку "get-account/id"
+
+    ### Auth
+  - Установка пакета `itsdangerous` (dev-dependency)
+    > poetry add itsdangerous
 </details>
 
 > &#10060; &uArr; &uArr; &uArr; BOILERPLATE DESCRIPTION. REMOVE AFTER INITIALIZATION &uArr; &uArr; &uArr; &#10060;

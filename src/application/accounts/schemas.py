@@ -25,3 +25,18 @@ class AccountCreateSchema(BaseModel):
 class AccountUpdateSchema(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
+
+
+class AccountLoginSchema(BaseModel):
+    username: str
+    password: str
+
+
+class RefreshTokenSchema(BaseModel):
+    token: str
+
+
+class TokensSchema(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str
