@@ -24,7 +24,7 @@
   <summary>Click!</summary>
 
   ### Менеджер пакетов Poetry
-  
+
   - Установка пакета `Poetry` (если не установлен)
     > pip install poetry
   - Poetry. Локальная конфигурация: создавать venv в корне проекта
@@ -36,9 +36,9 @@
   - Poetry. Активация venv
     > poetry shell
   - В среде разработки для проекта необходимо выбрать интерпретатор из локального venv
-  
+
   ### Фреймворк FastAPI
-  
+
   - Установка пакета `FastAPI`
     > poetry add fastapi
   - Установка пакета `Uvicorn` (ASGI-сервер)
@@ -52,7 +52,7 @@
     - Target to run - Module name: (указать название пакета приложения, в данном случае - application)
     - Python interpreter: (выбрать из локального venv)
     - Working directory: (указать корень проекта)
-  
+
   ### Работа с конфигурацией приложения
 
   - Установка пакета `dynaconf`
@@ -108,7 +108,7 @@
     ### Auth
   - Установка пакета `itsdangerous` (dev-dependency)
     > poetry add itsdangerous
-    
+
     ### Линтинг
     - Установка пакета `itsdangerous` (dev-dependency)
     > poetry add --dev itsdangerous

@@ -1,7 +1,7 @@
 """Create 'accounts' table
 
 Revision ID: 6073f90c5a44
-Revises: 
+Revises:
 Create Date: 2021-09-26 02:24:57.358907
 
 """
