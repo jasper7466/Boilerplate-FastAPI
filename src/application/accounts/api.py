@@ -24,10 +24,6 @@ router = APIRouter(
 )
 
 
-def initialize_app(app: FastAPI):
-    app.include_router(router)
-
-
 @router.post('/login', response_model=TokensSchema)
 def login(
     credentials: OAuth2PasswordRequestForm = Depends(),

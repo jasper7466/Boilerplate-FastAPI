@@ -5,7 +5,9 @@ from fastapi.staticfiles import StaticFiles
 from starlette.middleware.sessions import SessionMiddleware
 
 from .config import settings
-from .accounts import api as accounts_api
+
+from . import accounts
+from . import auth
 
 
 # Авто-создание директории со статикой, если её не существует
@@ -21,5 +23,6 @@ app.add_middleware(
     max_age=100000,
 )
 app.mount(settings.static_url, StaticFiles(directory=settings.static_directory), name='static')
-accounts_api.initialize_app(app)
+accounts.attach_app(app)
+auth.attach_app(app)
 
