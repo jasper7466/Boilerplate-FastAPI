@@ -1,3 +1,5 @@
+"""Работа с базой данных"""
+
 from sqlalchemy import create_engine
 from sqlalchemy import event
 from sqlalchemy.engine import Engine
@@ -7,9 +9,15 @@ from sqlalchemy.orm import sessionmaker
 from .config import settings
 
 
-# Включение проверки внешних ключей (для sqlite)
 @event.listens_for(Engine, 'connect')
 def enable_foreign_keys(dbapi_connection, connection_record):
+    """
+    Функция включения проверки внешних ключей (для sqlite).
+    Подписана на событие подключения к БД
+    :param dbapi_connection: Подключение к БД
+    :param connection_record:
+    :return: void
+    """
     cursor = dbapi_connection.cursor()
     cursor.execute('PRAGMA foreign_keys=ON')
     cursor.close()
@@ -22,7 +30,6 @@ engine = create_engine(
 )
 
 Session = sessionmaker(engine, future=True)
-Base = declarative_base()
 
 
 def get_session() -> Session:
@@ -30,4 +37,8 @@ def get_session() -> Session:
         yield session
 
 
+Base = declarative_base()
+
+
 from .accounts.models import AccountTable  # noqa
+from .auth.models import RefreshTokenTable  # noqa

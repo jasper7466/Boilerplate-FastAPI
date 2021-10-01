@@ -1,52 +1,25 @@
 from typing import List
 
-from fastapi import FastAPI
 from fastapi import APIRouter
-from fastapi import File
-from fastapi import UploadFile
 from fastapi import Depends
+from fastapi import File
 from fastapi import HTTPException
+from fastapi import UploadFile
 from fastapi import status
-from fastapi.security import OAuth2PasswordRequestForm
 
-# from ..auth import AccountAuthModel, create_token
-# from ..auth import get_current_account
-from ..exeptions import EntityConflictError
-from ..exeptions import EntityDoesNotExistError
-from .schemas import AccountSchema, TokensSchema, RefreshTokenSchema
-from .schemas import AccountLoginSchema
+from .schemas import AccountSchema
 from .schemas import AccountCreateSchema
 from .schemas import AccountUpdateSchema
 from .services import AccountService
+from ..auth.dependencies import get_current_account
+from ..auth.schemas import AuthAccountSchema
+from ..exceptions import EntityConflictError
+from ..exceptions import EntityDoesNotExistError
+
 
 router = APIRouter(
-    prefix='/accounts'
+    prefix='/accounts',
 )
-
-
-@router.post('/login', response_model=TokensSchema)
-def login(
-    credentials: OAuth2PasswordRequestForm = Depends(),
-    account_service: AccountService = Depends(),
-):
-    account_login = AccountLoginSchema(
-        username=credentials.username,
-        password=credentials.password,
-    )
-    account = account_service.authenticate_account(account_login)
-    return account_service.create_tokens(account)
-
-
-@router.post('/refresh-token', response_model=TokensSchema)
-def refresh_token(
-    old_token: RefreshTokenSchema,
-    account_service: AccountService = Depends(),
-):
-    try:
-        account = account_service.get_account_by_refresh_token(old_token.token)
-    except EntityDoesNotExistError:
-        raise HTTPException(status.HTTP_401_UNAUTHORIZED)
-    return account_service.create_tokens(account)
 
 
 @router.post(
@@ -67,7 +40,7 @@ def create_account(
 
 @router.get('', response_model=List[AccountSchema])
 def get_accounts(
-    current_account: AccountAuthModel = Depends(get_current_account),
+    current_account: AuthAccountSchema = Depends(get_current_account),
     service: AccountService = Depends(),
 ):
     return service.get_accounts()
@@ -76,6 +49,7 @@ def get_accounts(
 @router.get('/{account_id}', response_model=AccountSchema)
 def get_account(
     account_id: int,
+    current_account: AuthAccountSchema = Depends(get_current_account),
     service: AccountService = Depends(),
 ):
     try:
@@ -88,6 +62,7 @@ def get_account(
 def edit_account(
     account_id: int,
     account_update: AccountUpdateSchema,
+    current_account: AuthAccountSchema = Depends(get_current_account),
     service: AccountService = Depends(),
 ):
     try:
@@ -101,6 +76,7 @@ def edit_account(
 def update_account_avatar(
     account_id: int,
     avatar: UploadFile = File(...),
+    current_account: AuthAccountSchema = Depends(get_current_account),
     service: AccountService = Depends(),
 ):
     try:
