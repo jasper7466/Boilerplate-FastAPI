@@ -1,3 +1,5 @@
+"""Конфигурация приложения"""
+
 from pathlib import Path
 from dynaconf import Dynaconf
 
@@ -16,4 +18,9 @@ settings = Dynaconf(
 
 
 def get_settings() -> Dynaconf:
+    """
+    Функция для получения конфигурации
+
+    :return: Настройки приложения
+    """
     return settings

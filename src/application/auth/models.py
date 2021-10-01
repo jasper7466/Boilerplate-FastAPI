@@ -1,3 +1,5 @@
+"""Модели таблиц эндпоинта 'auth'"""
+
 from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
@@ -7,6 +9,7 @@ from ..database import Base
 
 
 class RefreshTokenTable(Base):
+    """Таблица токенов для обновления"""
     __tablename__ = 'refresh_tokens'
 
     id = Column(Integer, primary_key=True)

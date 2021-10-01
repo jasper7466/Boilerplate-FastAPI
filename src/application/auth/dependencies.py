@@ -1,3 +1,5 @@
+# pylint: disable=C0114
+
 from fastapi import Depends
 from fastapi import HTTPException
 from fastapi import status
@@ -17,6 +19,13 @@ def get_current_account(
     token: str = Depends(oauth2_scheme),
     settings: Settings = Depends(get_settings),
 ) -> AuthAccountSchema:
+    """
+    Функция получения аккаунта по токену
+
+    :param token: Токен
+    :param settings: Настройки приложения
+    :return: AuthAccountSchema
+    """
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail='Unauthorized user',

@@ -1,3 +1,6 @@
+# pylint: disable=C0413
+# pylint: disable=W0611
+
 """Работа с базой данных"""
 
 from sqlalchemy import create_engine
@@ -10,12 +13,12 @@ from .config import settings
 
 
 @event.listens_for(Engine, 'connect')
-def enable_foreign_keys(dbapi_connection, connection_record):
+def enable_foreign_keys(dbapi_connection):
     """
     Функция включения проверки внешних ключей (для sqlite).
     Подписана на событие подключения к БД
+
     :param dbapi_connection: Подключение к БД
-    :param connection_record:
     :return: void
     """
     cursor = dbapi_connection.cursor()
@@ -33,6 +36,11 @@ Session = sessionmaker(engine, future=True)
 
 
 def get_session() -> Session:
+    """
+    Функция для создания сессии с последующим закрытием
+
+    :return: Сессия
+    """
     with Session() as session:
         yield session
 

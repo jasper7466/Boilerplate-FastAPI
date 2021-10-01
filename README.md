@@ -15,6 +15,7 @@
 - ORM: SQLAlchemy
 - Миграции: Alembic
 - Авторизация: OAuth2
+- Авто-тесты: PyTest
 - Линтер: PyLint
 
 ## Лог ручной инициализации
