@@ -15,6 +15,7 @@
 - ORM: SQLAlchemy
 - Миграции: Alembic
 - Авторизация: OAuth2
+- Линтер: PyLint
 
 ## Лог ручной инициализации
 
@@ -106,6 +107,11 @@
     ### Auth
   - Установка пакета `itsdangerous` (dev-dependency)
     > poetry add itsdangerous
+    
+    ### Линтинг
+    - Установка пакета `itsdangerous` (dev-dependency)
+    > poetry add --dev itsdangerous
+    > pylint --generate-rcfile > .pylintrc
 </details>
 
 > &#10060; &uArr; &uArr; &uArr; BOILERPLATE DESCRIPTION. REMOVE AFTER INITIALIZATION &uArr; &uArr; &uArr; &#10060;
