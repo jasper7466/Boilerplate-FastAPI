@@ -9,8 +9,8 @@ from fastapi import HTTPException
 from fastapi import status
 from fastapi.security import OAuth2PasswordRequestForm
 
-from ..auth import AccountAuthModel, create_token
-from ..auth import get_current_account
+# from ..auth import AccountAuthModel, create_token
+# from ..auth import get_current_account
 from ..exeptions import EntityConflictError
 from ..exeptions import EntityDoesNotExistError
 from .schemas import AccountSchema, TokensSchema, RefreshTokenSchema

@@ -1,3 +1,7 @@
+"""
+Сервис "accounts"
+"""
+
 import shutil
 from typing import List
 
@@ -27,15 +31,28 @@ from .schemas import AccountUpdateSchema
 
 
 class AccountService:
+    """
+    Сервис "accounts"
+    """
     def __init__(
         self,
         session: Session = Depends(get_session),
         settings: Settings = Depends(get_settings)
     ):
+        """
+        Конструктор
+        :param session: Подключение к БД
+        :param settings: Глобальная конфигурация приложения
+        """
         self.session = session
         self.settings = settings
 
     def create_account(self, account_create: AccountCreateSchema):
+        """
+        Метод создания нового аккаунта
+        :param account_create: Параметры создаваемого аккаунта
+        :return: Параметры созданного аккаунта
+        """
         account = AccountTable(
             email=account_create.email,
             username=account_create.username,
@@ -49,6 +66,11 @@ class AccountService:
             raise EntityConflictError from None
 
     def authenticate_account(self, account_login: AccountLoginSchema) -> AccountTable:
+        """
+        Метод аутентификации
+        :param account_login:
+        :return:
+        """
         try:
             account = self.session.execute(
                 select(AccountTable)

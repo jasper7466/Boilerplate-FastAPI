@@ -1,3 +1,5 @@
+"""Приложение. Точка входа"""
+
 import os
 
 from fastapi import FastAPI
@@ -11,8 +13,8 @@ from . import auth
 
 
 # Авто-создание директории со статикой, если её не существует
-is_static_exists = os.path.exists(settings.static_directory)
-if not is_static_exists:
+IS_STATIC_EXISTS = os.path.exists(settings.static_directory)
+if not IS_STATIC_EXISTS:
     os.makedirs(settings.static_directory)
 
 app = FastAPI()
@@ -25,4 +27,3 @@ app.add_middleware(
 app.mount(settings.static_url, StaticFiles(directory=settings.static_directory), name='static')
 accounts.attach_app(app)
 auth.attach_app(app)
-

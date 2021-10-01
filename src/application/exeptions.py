@@ -1,18 +1,21 @@
+"""Пользовательские исключения"""
+
+
 class BaseServiceError(Exception):
-    pass
+    """Базовый класс ошибок"""
 
 
 class ClientSideError(BaseServiceError):
-    pass
+    """Ошибки на стороне клиента"""
 
 
 class ServerSideError(BaseServiceError):
-    pass
+    """Ошибки на стороне сервера"""
 
 
 class EntityConflictError(ClientSideError):
-    pass
+    """Ошибка клиента: конфликт сущностей"""
 
 
 class EntityDoesNotExistError(ClientSideError):
-    pass
+    """Ошибка клиента: сущность не существует"""
