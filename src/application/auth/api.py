@@ -11,13 +11,14 @@ from .schemas import TokensPairSchema
 from .services import AuthService
 from ..exceptions import EntityDoesNotExistError
 
+ENDPOINT_TAG = 'auth'
 
 router = APIRouter(
-    prefix='/auth',
+    prefix=f'/{ENDPOINT_TAG}',
 )
 
 
-@router.post('/login', response_model=TokensPairSchema)
+@router.post('/login', response_model=TokensPairSchema, tags=[ENDPOINT_TAG])
 def login(
     credentials: OAuth2PasswordRequestForm = Depends(),
     auth_service: AuthService = Depends(),
@@ -35,7 +36,7 @@ def login(
         raise HTTPException(status.HTTP_401_UNAUTHORIZED) from None
 
 
-@router.post('/token')
+@router.post('/token', tags=[ENDPOINT_TAG])
 def token(
     refresh_token: str = Form(...),
     auth_service: AuthService = Depends(),

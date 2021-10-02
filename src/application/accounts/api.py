@@ -20,9 +20,10 @@ from ..auth.schemas import AuthAccountSchema
 from ..exceptions import EntityConflictError
 from ..exceptions import EntityDoesNotExistError
 
+ENDPOINT_TAG = 'accounts'
 
 router = APIRouter(
-    prefix='/accounts',
+    prefix=f'/{ENDPOINT_TAG}',
 )
 
 
@@ -30,6 +31,7 @@ router = APIRouter(
     '',
     response_model=AccountSchema,
     status_code=status.HTTP_201_CREATED,
+    tags=[ENDPOINT_TAG],
 )
 def create_account(
     account_create: AccountCreateSchema,
@@ -38,9 +40,9 @@ def create_account(
     """
     Ручка создания аккаунта
 
-    :param account_create: Параметры аккаунта
-    :param service: Сервис
-    :return: Данные созданного аккаунта
+    :param account_create: Параметры аккаунта.
+    :param service: Сервис.
+    :return: Данные созданного аккаунта.
     """
     try:
         account = service.create_account(account_create)
@@ -49,7 +51,7 @@ def create_account(
         raise HTTPException(status.HTTP_409_CONFLICT) from None
 
 
-@router.get('', response_model=List[AccountSchema])
+@router.get('', response_model=List[AccountSchema], tags=[ENDPOINT_TAG])
 def get_accounts(
     current_account: AuthAccountSchema = Depends(get_current_account),
     service: AccountsService = Depends(),
@@ -64,7 +66,7 @@ def get_accounts(
     return service.get_accounts()
 
 
-@router.get('/{account_id}', response_model=AccountSchema)
+@router.get('/{account_id}', response_model=AccountSchema, tags=[ENDPOINT_TAG])
 def get_account(
     account_id: int,
     current_account: AuthAccountSchema = Depends(get_current_account),
@@ -84,7 +86,7 @@ def get_account(
         raise HTTPException(status.HTTP_404_NOT_FOUND) from None
 
 
-@router.patch('/{account_id}', response_model=AccountSchema)
+@router.patch('/{account_id}', response_model=AccountSchema, tags=[ENDPOINT_TAG])
 def edit_account(
     account_id: int,
     account_update: AccountUpdateSchema,
@@ -107,7 +109,7 @@ def edit_account(
         raise HTTPException(status.HTTP_404_NOT_FOUND) from None
 
 
-@router.put('/{account_id}/avatar', response_model=AccountSchema)
+@router.put('/{account_id}/avatar', response_model=AccountSchema, tags=[ENDPOINT_TAG])
 def update_account_avatar(
     account_id: int,
     avatar: UploadFile = File(...),
