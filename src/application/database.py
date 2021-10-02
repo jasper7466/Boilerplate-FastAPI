@@ -1,5 +1,6 @@
 # pylint: disable=C0413
 # pylint: disable=W0611
+# pylint: disable=W0613
 
 """Работа с базой данных"""
 
@@ -13,12 +14,13 @@ from .config import settings
 
 
 @event.listens_for(Engine, 'connect')
-def enable_foreign_keys(dbapi_connection):
+def enable_foreign_keys(dbapi_connection, connection_record):
     """
     Функция включения проверки внешних ключей (для sqlite).
     Подписана на событие подключения к БД
 
     :param dbapi_connection: Подключение к БД
+    :param connection_record: unused
     :return: void
     """
     cursor = dbapi_connection.cursor()
@@ -29,7 +31,7 @@ def enable_foreign_keys(dbapi_connection):
 engine = create_engine(
     settings.database_url,
     future=True,
-    connect_args={'check_same_thread': False}
+    connect_args={'check_same_thread': False},
 )
 
 Session = sessionmaker(engine, future=True)
