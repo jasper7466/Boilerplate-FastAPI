@@ -18,10 +18,10 @@ itsdangerous = "^2.0.1"
 python-jose = "^3.3.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2.5"
 requests = "^2.26.0"
 pylint = "^2.11.1"
 pre-commit = "^2.15.0"
+pytest = "^6.2.5"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
